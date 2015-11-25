@@ -437,14 +437,14 @@ static int xtion_disable_streaming(struct xtion_endpoint *endp)
 	xtion_kill_urbs(endp);
 
 	/* And disable streaming in the hardware */
-// 	if(mutex_lock_interruptible(&endp->xtion->control_mutex) != 0) {
-// 		return -EAGAIN;
-// 	}
-//
-// 	xtion_set_param(endp->xtion, XTION_P_FRAME_SYNC, 0);
-// 	xtion_set_param(endp->xtion, endp->config->endpoint_register, XTION_VIDEO_STREAM_OFF);
+    if(mutex_lock_interruptible(&endp->xtion->control_mutex) != 0) {
+        return -EAGAIN;
+    }
 
-// 	mutex_unlock(&endp->xtion->control_mutex);
+    xtion_set_param(endp->xtion, XTION_P_FRAME_SYNC, 0);
+    xtion_set_param(endp->xtion, endp->config->endpoint_register, XTION_VIDEO_STREAM_OFF);
+
+    mutex_unlock(&endp->xtion->control_mutex);
 
 	return 0;
 }
